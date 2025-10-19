@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DB Viewer — forecasts_future & actuals_raw</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <h1 id="title">Viewing: <code id="which">forecasts_future</code></h1>
+      <div class="switcher">
+        <button id="showForecasts" class="primary">Show Forecasts</button>
+        <button id="showActuals">Show Actuals</button>
+        <label>Limit:
+          <input type="number" id="limitInput" value="500" min="1" step="50" />
+        </label>
+        <button id="refreshBtn">Refresh</button>
+      </div>
+    </header>
+
+    <!-- Forecast filter toggle (only visible in forecasts view) -->
+    <section id="forecastFilters" class="predictbar">
+      <span class="muted">pred_flag:</span>
+      <div class="toggle">
+        <button id="flagAll" class="primary">All (0 or 1)</button>
+        <button id="flagOnly1">Only 1</button>
+      </div>
+    </section>
+
+    <!-- Predict block -->
+    <section class="predictbar">
+      <label>Predict next
+        <input type="number" id="predictDays" value="7" min="1" max="60" />
+        days
+      </label>
+      <button id="predictBtn">Run Forecast Pipeline</button>
+      <span id="predictMsg" class="muted"></span>
+    </section>
+
+    <section class="tablewrap">
+      <table id="dataTable">
+        <thead><tr id="theadRow"></tr></thead>
+        <tbody id="dataBody"></tbody>
+      </table>
+      <div id="emptyMsg" class="muted" style="display:none;">No rows.</div>
+    </section>
+
+    <!-- Actuals upsert form -->
+    <section id="actualsFormWrap" style="display:none;">
+      <h2>Add / Update Actuals (upsert by <code>date</code>)</h2>
+      <form id="actualsForm">
+        <div class="grid">
+          <label>Date* <input type="date" name="date" required /></label>
+          <label>Store ID <input type="number" name="store_id" /></label>
+          <label>Product ID <input type="number" name="product_id" /></label>
+          <label>Product <input type="text" name="product" /></label>
+          <label>Category <input type="text" name="category" /></label>
+          <label>TOTAL_OUT_THE_DOOR <input type="number" step="any" name="TOTAL_OUT_THE_DOOR" /></label>
+          <label>TOTAL_AVAILABLE_TO_SELL <input type="number" step="any" name="TOTAL_AVAILABLE_TO_SELL" /></label>
+        </div>
+        <button type="submit">Save (Upsert to ACTUALS)</button>
+        <span id="formMsg" class="muted"></span>
+      </form>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+# === Bread Forecasting Configuration ===
+# (Tailored for your dataset columns)
+
+# --- EDIT THESE TWO FIRST ---
+# Path pattern to your CSVs (update to your actual folder)
+data_glob: "./Daily Sheet Data Cleaned Whole and Half/*.csv"
+# Where to save outputs (metrics, cleaned parquet, etc.)
+outputs_dir: "./outputs"
+
+# --- COLUMN DETECTION RULES ---
+# The loader will auto-detect whichever of these exist in each CSV
+
+date_column_candidates:
+  - Date
+  - date
+  - Day
+  - day
+
+product_column_candidates:
+  # Your dataset has Category + Product
+  - Product
+  - Category
+
+store_column_candidates: []   # Leave blank; you have a single source
+
+target_column_candidates:
+  # Main sales columns (both whole and half loaves)
+  - OUT_THE_DOOR_WHOLE
+  # - OUT_THE_DOOR_HALF
+
+price_column_candidates: []    # Not applicable
+promo_column_candidates: []    # Not applicable
+
+stock_column_candidates:
+  # Inventory / leftover columns (optional features)
+  - AVAILABLE_TO_SELL_WHOLE
+  - AVAILABLE_TO_SELL_HALF
+  - LEFT_WHOLE
+  - LEFT_HALF
+  - REMOVED_AS_DAY_OLD_WHOLE
+  - REMOVED_AS_DAY_OLD_HALF
+  - START_OF_DAY_WHOLE
+  - START_OF_DAY_HALF
+  - MADE_TODAY_WHOLE
+  - MADE_TODAY_HALF
+  - ORDERS_TODAY_WHOLE
+  - ORDERS_TODAY_HALF
+
+# --- FEATURE & TRAINING SETTINGS ---
+# Historical lookback features
+lags: [1, 7, 14, 28]
+roll_windows: [7, 14, 28]
+
+# Validation and test window sizes (days)
+val_size_days: 120
+test_size_days: 120
+
+# Weekly seasonality for SARIMA-like baseline
+seasonal_period: 7
+
+# Random seed for reproducibility
+random_seed: 42
