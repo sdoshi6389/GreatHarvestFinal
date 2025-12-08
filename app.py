@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, text
 import pandas as pd
 import os, sys, subprocess
 from pathlib import Path
+from typing import Optional
 
 FORECASTS_DB_PATH = os.environ.get("FORECASTS_DB", "db/bread_forecasts.db")
 ACTUALS_DB_PATH   = os.environ.get("ACTUALS_DB",   "db/bread_actuals.db")
@@ -141,7 +142,7 @@ def api_upsert_actuals():
     return jsonify({"ok": True, "action": action, "target": "actuals_raw"})
 
 # ---------- Predict pipeline (unchanged from your last working version) ----------
-def _find_pipeline_script() -> str | None:
+def _find_pipeline_script() -> Optional[str]:
     env_path = os.environ.get("PIPELINE_SCRIPT")
     if env_path:
         p = Path(env_path)
