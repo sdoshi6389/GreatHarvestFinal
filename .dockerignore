@@ -21,11 +21,11 @@ ENV/
 .git/
 .gitignore
 
-# Data files (don't upload cleaned data to cloud, takes too long)
-Daily Sheet Data Cleaned/
-Daily Sheet Data Cleaned Whole and Half/
-*.csv
-*.xlsx
+# Data files - Allow CSVs for pipeline to work
+# Daily Sheet Data Cleaned/
+# Daily Sheet Data Cleaned Whole and Half/
+# *.csv
+# *.xlsx
 
 # Output files
 outputs/

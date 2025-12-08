@@ -24,11 +24,11 @@ ENV/
 *.swp
 *.swo
 
-# Data files
-Daily Sheet Data Cleaned/
-Daily Sheet Data Cleaned Whole and Half/
-*.csv
-*.xlsx
+# Data files - Allow CSVs for pipeline to work
+# Daily Sheet Data Cleaned/
+# Daily Sheet Data Cleaned Whole and Half/
+# *.csv
+# *.xlsx
 
 # Output files
 outputs/
